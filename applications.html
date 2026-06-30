@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinical & Health Applications - Self-Regulation & Delay Discounting Evidence Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🧠</span>
+        <span>SR Evidence Hub</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="dropdown-trigger">Science ▾</a>
+          <div class="dropdown-menu">
+            <a href="genetics.html">Genetics</a>
+            <a href="epigenetics.html">Epigenetics</a>
+            <a href="neuroscience.html">Brain / Neuroscience</a>
+            <a href="theory.html">Theory & Models</a>
+            <a href="applications.html" class="active">Applications</a>
+          </div>
+        </li>
+        <li><a href="map.html">Interactive Map</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header Section -->
+  <section class="section observe-fade" style="padding-top: calc(var(--nav-height) + 3rem); padding-bottom: 3rem;">
+    <div class="container">
+      <div class="section-header">
+        <div class="hero-badge">Translational Impact</div>
+        <h1>Clinical & Health Applications</h1>
+        <p>Translating genetic and neurobiological insights into clinical interventions and health outcomes. Understanding how impulsivity and delay discounting affect cardiometabolic health, addiction vulnerability, and psychiatric conditions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tab Switcher -->
+  <section class="section">
+    <div class="container">
+      <div class="tab-switcher" style="display: flex; gap: 1rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; flex-wrap: wrap;">
+        <button data-tab="tab-cardio" class="active" style="background: none; border: none; color: var(--text-secondary); font-weight: 600; padding: 0; cursor: pointer; position: relative; transition: color 0.2s;">
+          Cardiometabolic Health
+          <span style="position: absolute; bottom: -1.5rem; left: 0; right: 0; height: 3px; background: var(--gradient-1); border-radius: 2px; display: none;"></span>
+        </button>
+        <button data-tab="tab-addiction" style="background: none; border: none; color: var(--text-secondary); font-weight: 600; padding: 0; cursor: pointer; position: relative; transition: color 0.2s;">
+          Addiction
+          <span style="position: absolute; bottom: -1.5rem; left: 0; right: 0; height: 3px; background: var(--gradient-1); border-radius: 2px; display: none;"></span>
+        </button>
+        <button data-tab="tab-psychiatric" style="background: none; border: none; color: var(--text-secondary); font-weight: 600; padding: 0; cursor: pointer; position: relative; transition: color 0.2s;">
+          Psychiatric Conditions
+          <span style="position: absolute; bottom: -1.5rem; left: 0; right: 0; height: 3px; background: var(--gradient-1); border-radius: 2px; display: none;"></span>
+        </button>
+      </div>
+
+      <!-- Tab 1: Cardiometabolic Health -->
+      <div id="tab-cardio" class="tab-content active observe-fade" style="margin-top: 2rem;">
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-icon teal">🫀</div>
+            <h3>Obesity & Metabolic Dysfunction</h3>
+            <p>Delay discounting is a strong predictor of obesity risk. Individuals with steeper discounting show greater preference for immediate caloric rewards, contributing to energy imbalance and metabolic dysfunction.</p>
+            <span class="card-tag">Phenotype</span>
+          </div>
+          <div class="card">
+            <div class="card-icon teal">🩺</div>
+            <h3>Type 2 Diabetes</h3>
+            <p>Impulsive decision-making and poor delay discounting are associated with reduced medication adherence, poor dietary control, and increased HbA1c levels in type 2 diabetes patients.</p>
+            <span class="card-tag">Clinical Outcome</span>
+          </div>
+          <div class="card">
+            <div class="card-icon teal">💓</div>
+            <h3>Cardiovascular Disease</h3>
+            <p>Genetic overlap between impulsivity and cardiovascular risk factors (hypertension, dyslipidemia) suggests shared biological pathways. Impulsive individuals show reduced engagement in preventive health behaviors.</p>
+            <span class="card-tag">Pleiotropy</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius);">
+          <h3 style="margin-bottom: 1.5rem;">Genetic Architecture & Prediction</h3>
+          <p style="margin-bottom: 1rem;"><strong>Genetic Overlap:</strong> Polygenic scores for impulsivity show significant correlation with BMI (r=0.18), systolic blood pressure (r=0.12), and lipid profiles. LDSC analysis reveals shared heritability between delay discounting and type 2 diabetes (rg=0.24, SE=0.08).</p>
+          <p style="margin-bottom: 1rem;"><strong>PGS Prediction Performance:</strong> Multi-trait PGS combining impulsivity with metabolic risk variants achieves R² = 0.08-0.12 for BMI prediction in independent cohorts (ALSPAC, UK Biobank). Performance improves when combined with environmental factors (diet, physical activity).</p>
+          <p><strong>Clinical Application:</strong> PGS-informed stratification could identify high-risk adolescents for targeted metabolic interventions before obesity onset. Integration with family history and behavioral phenotypes enhances predictive utility.</p>
+        </div>
+
+        <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius);">
+          <h3 style="margin-bottom: 1.5rem;">Epigenetic Pathways to Metabolic Health</h3>
+          <p style="margin-bottom: 1rem;"><strong>DNA Methylation in Regulatory Regions:</strong> Epigenetic variation at metabolic genes (POMC, NPY, LEPR) is associated with individual differences in delay discounting and shows tissue-specific patterns in hypothalamus and prefrontal cortex.</p>
+          <p style="margin-bottom: 1rem;"><strong>Environmental Influences:</strong> Nutritional stress, early-life adversity, and chronic inflammation are associated with methylation changes at imprinted genes and metabolic regulatory regions, potentially mediating effects on self-regulation capacity.</p>
+          <p><strong>Intervention Opportunities:</strong> Understanding epigenetic plasticity opens avenues for lifestyle interventions (diet, exercise) to improve both self-regulation and metabolic outcomes, particularly in sensitive developmental windows.</p>
+        </div>
+      </div>
+
+      <!-- Tab 2: Addiction -->
+      <div id="tab-addiction" class="tab-content observe-fade">
+        <div style="padding: 2rem; background: rgba(253, 121, 168, 0.1); border: 1px solid rgba(253, 121, 168, 0.2); border-radius: var(--radius); margin-bottom: 2rem;">
+          <h3 style="margin-bottom: 1rem; color: var(--accent);">Key Findings: MacKillop Meta-Analyses</h3>
+          <p><strong>Steep Delay Discounting Across All Substance Use:</strong> Meta-analysis of 146 studies (n > 15,000) demonstrates robust effect: <em>r = 0.14, p < 10^-14</em>. Substance-dependent individuals consistently discount future rewards more steeply than controls.</p>
+          <p style="margin-top: 0.75rem;"><strong>Substance-Specific Effects:</strong> Alcohol (r = 0.16), tobacco (r = 0.15), cannabis (r = 0.12), stimulants (r = 0.18), opiates (r = 0.14) all show significant associations. Magnitude of discounting predicts treatment response and relapse risk.</p>
+        </div>
+
+        <div class="cards-grid" style="margin-bottom: 3rem;">
+          <div class="card">
+            <div class="card-icon pink">🍻</div>
+            <h3>Alcohol & Behavioral Economics</h3>
+            <p>Demand curve analysis reveals steeper price elasticity in alcohol-dependent individuals. Essential value (α) and elasticity (β) parameters predict drinking severity and treatment outcomes.</p>
+            <span class="card-tag">Demand</span>
+          </div>
+          <div class="card">
+            <div class="card-icon pink">🚬</div>
+            <h3>Tobacco Dependence</h3>
+            <p>Nicotine-dependent smokers show strong preference for immediate smoking rewards. Steep discounting predicts poor quit rates and higher relapse vulnerability independent of withdrawal severity.</p>
+            <span class="card-tag">Cigarettes</span>
+          </div>
+          <div class="card">
+            <div class="card-icon pink">🌿</div>
+            <h3>Cannabis Use Disorder</h3>
+            <p>Cannabis-dependent individuals discount delayed outcomes steeply, particularly for health consequences. Discounting correlates with CUD severity and treatment engagement.</p>
+            <span class="card-tag">Cannabis</span>
+          </div>
+          <div class="card">
+            <div class="card-icon pink">⚡</div>
+            <h3>Stimulant Addiction</h3>
+            <p>Cocaine and methamphetamine users show the steepest discounting rates among substance users. Functional imaging shows altered PFC activity during delay discounting tasks.</p>
+            <span class="card-tag">Stimulants</span>
+          </div>
+          <div class="card">
+            <div class="card-icon pink">💊</div>
+            <h3>Opioid Use Disorder</h3>
+            <p>Opioid-dependent individuals show elevated discounting that partially normalizes during medication-assisted treatment, particularly with extended-release formulations providing future-oriented incentive structures.</p>
+            <span class="card-tag">Opioids</span>
+          </div>
+          <div class="card">
+            <div class="card-icon pink">🎰</div>
+            <h3>Gambling Disorder</h3>
+            <p>Behavioral addiction with steep delay discounting. Similar neural circuits implicated in substance addiction (ventral striatum, insula). Treatment-responsive to contingency management approaches.</p>
+            <span class="card-tag">Behavioral</span>
+          </div>
+        </div>
+
+        <div style="padding: 2rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); margin-bottom: 2rem;">
+          <h3 style="margin-bottom: 1rem;">PheWAS Analysis: Alcohol-Related PGS Pleiotropy</h3>
+          <p style="margin-bottom: 1rem;">Recent PheWAS of alcohol consumption and alcohol-related disorders PGS across 42 phenotypes (Deng et al. 2024, <em>Alcohol & Alcoholism</em>) identified:</p>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1rem; color: var(--text-secondary);">
+            <li>Expected associations: AUD severity, alcohol consumption, hepatic phenotypes</li>
+            <li>Cross-disorder effects: Depression, anxiety, ADHD, personality traits (impulsivity, extraversion)</li>
+            <li>Metabolic pleiotropy: BMI, lipids, glucose metabolism</li>
+            <li>Behavioral overlap: Risk-taking propensity, reward sensitivity</li>
+          </ul>
+          <p><strong>Clinical Implication:</strong> Shared genetic architecture suggests common interventional targets. Individuals at high genetic risk for AUD may benefit from transdiagnostic interventions addressing impulsivity, mood regulation, and metabolic health simultaneously.</p>
+        </div>
+
+        <div style="padding: 2rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius);">
+          <h3 style="margin-bottom: 1rem;">Treatment & Intervention Opportunities</h3>
+          <p style="margin-bottom: 1rem;"><strong>Contingency Management:</strong> Behavioral interventions leveraging understanding of delay discounting show superior outcomes. Immediate, tangible rewards for abstinence are particularly effective in steep discounters.</p>
+          <p style="margin-bottom: 1rem;"><strong>Cognitive Remediation:</strong> Training that improves future-oriented thinking and reward sensitivity rebalancing reduces craving and relapse rates. Particularly effective for stimulant and opioid use disorders.</p>
+          <p><strong>Pharmacological Approaches:</strong> Medications that enhance dopaminergic transmission in prefrontal-striatal circuits (e.g., bupropion, extended-release formulations) improve self-regulation capacity and treatment adherence in addiction.</p>
+        </div>
+      </div>
+
+      <!-- Tab 3: Psychiatric Conditions -->
+      <div id="tab-psychiatric" class="tab-content observe-fade">
+        <div class="cards-grid" style="margin-bottom: 3rem;">
+          <div class="card">
+            <div class="card-icon yellow">🧩</div>
+            <h3>ADHD & Impulsivity Genetics</h3>
+            <p>Strong genetic overlap between ADHD and delay discounting (genetic correlation rg = 0.65, p < 10^-50). Polygenic scores for ADHD predict worse delay discounting in population samples.</p>
+            <span class="card-tag">Externalizing</span>
+          </div>
+          <div class="card">
+            <div class="card-icon yellow">⚡</div>
+            <h3>Externalizing Spectrum Disorders</h3>
+            <p>Conduct disorder, oppositional defiant disorder, and antisocial personality traits share common genetic basis with impulsivity. Impulsive action and impulsive choice both elevated in externalizing psychopathology.</p>
+            <span class="card-tag">Transdiagnostic</span>
+          </div>
+          <div class="card">
+            <div class="card-icon yellow">😔</div>
+            <h3>Major Depression & Anhedonia</h3>
+            <p>Depressed individuals show increased delay discounting, particularly for negative future outcomes. Anhedonia subtype shows steepest discounting. Improves with antidepressant treatment and behavioral activation.</p>
+            <span class="card-tag">Mood Disorder</span>
+          </div>
+          <div class="card">
+            <div class="card-icon yellow">😰</div>
+            <h3>Anxiety Disorders & Urgency</h3>
+            <p>Negative urgency (rash action under distress) shows distinct profile from ADHD-related impulsivity. Elevated in panic disorder, social anxiety, and generalized anxiety with avoidance-based coping.</p>
+            <span class="card-tag">Anxiety</span>
+          </div>
+          <div class="card">
+            <div class="card-icon yellow">🔄</div>
+            <h3>Bipolar Disorder</h3>
+            <p>Elevated impulsivity and reward sensitivity across mood states, particularly during hypomanic/manic episodes. Genetic overlap with impulsivity traits suggests common biological underpinnings.</p>
+            <span class="card-tag">Mood Disorder</span>
+          </div>
+          <div class="card">
+            <div class="card-icon yellow">🎯</div>
+            <h3>Personality & Self-Regulation</h3>
+            <p>Delay discounting inversely correlates with conscientiousness and self-control. Impulsive traits show cross-diagnostic relevance across personality disorders, particularly cluster B.</p>
+            <span class="card-tag">Transdiagnostic</span>
+          </div>
+        </div>
+
+        <div style="padding: 2rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); margin-bottom: 2rem;">
+          <h3 style="margin-bottom: 1rem;">Cross-Diagnostic Relevance of Self-Regulation</h3>
+          <p style="margin-bottom: 1rem;">Impulsivity and poor delay discounting are not disorder-specific but rather transdiagnostic factors that cut across traditional diagnostic boundaries:</p>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1rem; color: var(--text-secondary);">
+            <li><strong>Shared Neurobiology:</strong> Prefrontal cortex dysfunction, ventral striatum hyperactivation, altered dopaminergic signaling</li>
+            <li><strong>Genetic Commonality:</strong> Polygenic scores for impulsivity predict risk across ADHD, depression, addiction, and externalizing disorders</li>
+            <li><strong>Treatment Response:</strong> Interventions targeting self-regulation (cognitive training, mindfulness, medication) benefit multiple conditions</li>
+            <li><strong>Developmental Trajectories:</strong> Early delay discounting predicts later psychopathology across multiple domains</li>
+          </ul>
+        </div>
+
+        <div style="padding: 2rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius);">
+          <h3 style="margin-bottom: 1rem;">Clinical Integration & Measurement</h3>
+          <p style="margin-bottom: 1rem;"><strong>Assessment Standardization:</strong> Delay discounting tasks (temporal discounting paradigms, drift diffusion modeling) could be integrated into psychiatric assessment batteries to identify transdiagnostic impulsivity factors and personalize treatment.</p>
+          <p style="margin-bottom: 1rem;"><strong>Biomarker Approach:</strong> Combining genetic (PGS), neurobiological (fMRI, EEG), and behavioral measures of impulsivity provides comprehensive phenotyping for precision psychiatry applications.</p>
+          <p><strong>Intervention Matching:</strong> Individuals with high impulsivity profiles may benefit from transdiagnostic interventions (DBT, ACT, contingency management) rather than traditional disorder-specific protocols.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" style="margin-top: 5rem; padding: 2rem; background: var(--bg-section); border-top: 1px solid var(--border-color);">
+    <div class="container" style="text-align: center;">
+      <p>&copy; 2026 Self-Regulation & Delay Discounting Evidence Hub</p>
+      <p style="margin-top: 0.3rem; color: var(--text-muted);">Deng Lab &middot; Peter Boris Centre for Addictions Research &middot; McMaster University</p>
+      <div class="footer-links" style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+        <a href="index.html" style="color: var(--text-secondary); font-size: 0.9rem;">Home</a>
+        <a href="publications.html" style="color: var(--text-secondary); font-size: 0.9rem;">Publications</a>
+        <a href="map.html" style="color: var(--text-secondary); font-size: 0.9rem;">Interactive Map</a>
+        <a href="resources.html" style="color: var(--text-secondary); font-size: 0.9rem;">Resources</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Tab Switcher Styling Enhancement -->
+  <style>
+    .tab-switcher button {
+      color: var(--text-secondary);
+    }
+    .tab-switcher button.active {
+      color: var(--text-primary);
+      border-bottom: 3px solid var(--gradient-1);
+      padding-bottom: 0.25rem;
+    }
+    .tab-switcher button:hover:not(.active) {
+      color: var(--text-primary);
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

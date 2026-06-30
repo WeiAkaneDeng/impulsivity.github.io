@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theory & Mathematical Models - SR Evidence Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Additional styles for equations and models */
+    .equation-box {
+      background: rgba(108, 92, 231, 0.08);
+      border: 1px solid rgba(108, 92, 231, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+    }
+
+    .equation {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+      margin: 0.75rem 0;
+    }
+
+    .equation-label {
+      font-size: 0.85rem;
+      color: var(--secondary);
+      font-weight: 600;
+      margin-top: 0.75rem;
+    }
+
+    .equation-description {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .model-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .model-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(108, 92, 231, 0.4);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .model-card h4 {
+      color: var(--secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .factor-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .factor-list li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .factor-list li:last-child {
+      border-bottom: none;
+    }
+
+    .factor-list strong {
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🧠</span>
+        <span>SR Evidence Hub</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="dropdown-trigger">Science ▾</a>
+          <div class="dropdown-menu">
+            <a href="genetics.html">Genetics</a>
+            <a href="epigenetics.html">Epigenetics</a>
+            <a href="neuroscience.html">Brain / Neuroscience</a>
+            <a href="theory.html" class="active">Theory & Models</a>
+            <a href="applications.html">Applications</a>
+          </div>
+        </li>
+        <li><a href="map.html">Interactive Map</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="eyebrow">Quantitative Frameworks</div>
+      <h1>Theory & Mathematical Models</h1>
+      <p>Formal mathematical and computational models that describe how individuals value delayed rewards and make intertemporal decisions.</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Delay Discounting Models -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Intertemporal Choice</div>
+          <h2>Delay Discounting Models</h2>
+          <p>Mathematical models describe how the subjective value of a reward decreases as a function of delay. Different formulations capture distinct patterns of human discounting behavior.</p>
+        </div>
+
+        <!-- Exponential Discounting -->
+        <div class="observe-fade">
+          <h3 style="margin-bottom: 1rem;">Exponential Discounting</h3>
+          <p>The simplest model assumes constant discounting rate—rewards lose value at a fixed percentage per unit time. Despite its theoretical elegance, it poorly captures human behavior.</p>
+
+          <div class="equation-box">
+            <div class="equation">V = A × e<sup>-kD</sup></div>
+            <div class="equation-label">Standard Form (Continuous Time)</div>
+            <div class="equation-description">
+              Where: V = present value of delayed reward | A = reward amount | k = discounting rate parameter | D = delay in time units | e = Euler's number (≈2.718)
+            </div>
+          </div>
+
+          <div class="callout">
+            <h4>Limitation</h4>
+            <p>Exponential models predict that time preference is constant over time (time consistency). However, humans exhibit preference reversals, preferring to wait 10 vs. 11 weeks more readily than choosing between immediate vs. 1 week delayed rewards.</p>
+          </div>
+        </div>
+
+        <!-- Hyperbolic Discounting -->
+        <div class="observe-fade" style="margin-top: 2.5rem;">
+          <h3 style="margin-bottom: 1rem;">Hyperbolic Discounting (Mazur)</h3>
+          <p>Observed discounting is better described by a hyperbolic function, which predicts steeper discounting at shorter delays and shallower discounting at longer delays. This captures the "present bias" phenomenon.</p>
+
+          <div class="equation-box">
+            <div class="equation">V = A / (1 + kD)</div>
+            <div class="equation-label">Mazur's Hyperbolic Model</div>
+            <div class="equation-description">
+              Where: V = present value | A = reward magnitude | k = discounting rate parameter | D = delay
+            </div>
+          </div>
+
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0;">
+            <h4 style="color: var(--secondary); margin-bottom: 1rem;">Mathematical Properties</h4>
+            <ul style="padding-left: 1.5rem; color: var(--text-secondary); line-height: 2; margin: 0;">
+              <li><strong>Near delay:</strong> Value drops steeply with small increases in delay</li>
+              <li><strong>Far delay:</strong> Additional delays have minimal impact on value</li>
+              <li><strong>Time-inconsistency:</strong> Explains preference reversals and self-control problems</li>
+              <li><strong>Better empirical fit:</strong> Consistently outperforms exponential models</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Quasi-Hyperbolic -->
+        <div class="observe-fade" style="margin-top: 2.5rem;">
+          <h3 style="margin-bottom: 1rem;">Quasi-Hyperbolic Discounting (Beta-Delta)</h3>
+          <p>Also called the Laibson model, this combines exponential and hyperbolic features. It includes an immediate discount factor (β) and exponential time-discounting (δ), capturing both present bias and constant long-term patience.</p>
+
+          <div class="equation-box">
+            <div class="equation">V = A × (β × δ<sup>D</sup>) &nbsp;&nbsp; [for D > 0]</div>
+            <div class="equation-label">Quasi-Hyperbolic Model</div>
+            <div class="equation-description">
+              Where: β = immediate discount factor (0 ≤ β ≤ 1, typically < 1 indicating present bias) | δ = exponential discount factor per unit time | D = delay
+            </div>
+          </div>
+        </div>
+
+        <!-- Hyperboloid Model -->
+        <div class="observe-fade" style="margin-top: 2.5rem;">
+          <h3 style="margin-bottom: 1rem;">Hyperboloid Model (Loewenstein & Prelec)</h3>
+          <p>This generalized function includes a shape parameter (s) that allows flexible curvature. When s = 1, it reduces to the Mazur hyperbolic model; when s → 0, it approaches exponential discounting.</p>
+
+          <div class="equation-box">
+            <div class="equation">V = A / (1 + kD)<sup>s</sup></div>
+            <div class="equation-label">Generalized Hyperboloid Model</div>
+            <div class="equation-description">
+              Where: s = shape parameter | When s &gt; 1, the function has an even steeper initial drop; when 0 &lt; s &lt; 1, the drop is shallower. The exponent s captures individual differences in discounting curvature.
+            </div>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 2rem;">
+          <h4>Key Finding</h4>
+          <p>The choice of discount model affects parameter interpretation and clinical implications. Hyperbolic models better predict real-world behavior and explain why people struggle with long-term commitments despite valuing future outcomes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Behavioral Economic Framework -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Economic Behavior</div>
+          <h2>Behavioral Economic Framework</h2>
+          <p>Demand curve analysis quantifies how much of a reinforcer (drug, food, money) is consumed as its "price" or cost increases.</p>
+        </div>
+
+        <div class="two-col observe-fade">
+          <div>
+            <h3 style="margin-bottom: 1.5rem;">Essential Demand Parameters</h3>
+            <p style="margin-bottom: 1rem;">Behavioral economic demand curves characterize consumption across price levels using three key parameters:</p>
+
+            <ul class="factor-list">
+              <li><strong>Amplitude (Q0):</strong> Consumption at zero price (y-intercept); reflects initial motivation or desire for the commodity</li>
+              <li><strong>Persistence (α):</strong> How steeply consumption decreases with price increases; captures essential value and difficulty substituting the commodity</li>
+              <li><strong>Essential Value (Pmax):</strong> The theoretical price at which demand reaches zero; indicates maximum willingness to pay or effort expended</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 style="margin-bottom: 1.5rem;">Exponential Demand Equation</h3>
+
+            <div class="equation-box">
+              <div class="equation">log Q = log Q₀ + k(e<sup>-α·P</sup> - 1)</div>
+              <div class="equation-label">Exponential Demand Model</div>
+              <div class="equation-description">
+                Where: Q = quantity consumed at price P | Q₀ = consumption at zero price | α = elasticity parameter | k = scaling constant | e = Euler's number
+              </div>
+            </div>
+
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 1rem;">This equation characterizes "normal" commodity demand. Steeper slopes indicate more essential goods (addictive substances show steep, inelastic demand).</p>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 2rem;">
+          <h4>Clinical Application</h4>
+          <p>Demand curve analysis predicts treatment response in addiction. Individuals with high essential value (steep demand curves) are at greater relapse risk. Price increases (e.g., taxation) effectively reduce consumption for less essential commodities but may have limited impact on highly essential drugs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- UPPS-P Model -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Multidimensional Trait Model</div>
+          <h2>UPPS-P Model of Impulsivity</h2>
+          <p>Rather than treating impulsivity as a unitary construct, the UPPS-P model identifies five distinct dimensions that predict different outcomes and have different neural and genetic substrates.</p>
+        </div>
+
+        <div class="model-grid observe-fade">
+          <div class="model-card">
+            <h4>Negative Urgency</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-secondary);">The tendency to act rashly in response to negative emotions. Associated with:</p>
+            <ul class="factor-list">
+              <li><strong>Neural:</strong> Amygdala reactivity, prefrontal-limbic dysfunction</li>
+              <li><strong>Genetic:</strong> COMT, serotonergic variants</li>
+              <li><strong>Outcomes:</strong> Emotion-driven substance use, self-harm</li>
+            </ul>
+          </div>
+
+          <div class="model-card">
+            <h4>Positive Urgency</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-secondary);">Rash action in response to positive emotions or excitement. Associated with:</p>
+            <ul class="factor-list">
+              <li><strong>Neural:</strong> Reward system hyperactivity, ventral striatum</li>
+              <li><strong>Genetic:</strong> Dopaminergic variants (DRD2, DAT1)</li>
+              <li><strong>Outcomes:</strong> Reward-driven risk-taking, binge consumption</li>
+            </ul>
+          </div>
+
+          <div class="model-card">
+            <h4>Sensation Seeking</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-secondary);">Preference for exciting, novel, and intense experiences. Associated with:</p>
+            <ul class="factor-list">
+              <li><strong>Neural:</strong> Low baseline dopamine, reward-seeking activation</li>
+              <li><strong>Genetic:</strong> Low COMT activity, low dopamine in baseline state</li>
+              <li><strong>Outcomes:</strong> Drug experimentation, novelty-seeking behaviors</li>
+            </ul>
+          </div>
+
+          <div class="model-card">
+            <h4>Lack of Premeditation</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-secondary);">Failure to consider consequences before acting. Associated with:</p>
+            <ul class="factor-list">
+              <li><strong>Neural:</strong> Reduced prefrontal-striatal connectivity, weak foresight</li>
+              <li><strong>Genetic:</strong> Variants affecting executive function networks</li>
+              <li><strong>Outcomes:</strong> Careless errors, planning failures, accidents</li>
+            </ul>
+          </div>
+
+          <div class="model-card">
+            <h4>Lack of Perseverance</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-secondary);">Difficulty maintaining focus and effort toward goals. Associated with:</p>
+            <ul class="factor-list">
+              <li><strong>Neural:</strong> Anterior cingulate dysfunction, salience network</li>
+              <li><strong>Genetic:</strong> Variants affecting sustained attention and effort</li>
+              <li><strong>Outcomes:</strong> Task switching, goal abandonment, ADHD symptoms</li>
+            </ul>
+          </div>
+
+          <div class="model-card">
+            <h4>Delay Discounting (Implicit)</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-secondary);">The UPPS-P focuses on affective impulsivity; delay discounting represents a separate "cold" cognitive dimension that sometimes correlates with these factors.</p>
+            <ul class="factor-list">
+              <li><strong>Neural:</strong> Ventromedial prefrontal cortex, valuation systems</li>
+              <li><strong>Genetic:</strong> Partly distinct from UPPS-P dimensions</li>
+              <li><strong>Outcomes:</strong> Temporal preference, intertemporal choice</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 2rem;">
+          <h4>Clinical Relevance</h4>
+          <p>Different impulsivity dimensions predict distinct clinical outcomes. Negative urgency predicts externalizing disorders and substance use; sensation seeking predicts early drug experimentation; lack of perseverance predicts ADHD. Interventions should target the specific impulsivity dimension driving problematic behavior.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Life Course Perspective -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Developmental Theory</div>
+          <h2>Life Course Perspective</h2>
+          <p>Impulsivity and self-regulation show systematic developmental changes. Understanding these trajectories reveals critical periods and mechanisms of change across the lifespan.</p>
+        </div>
+
+        <div class="cards-grid observe-fade">
+          <div class="card">
+            <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Adolescence (10-25 years)</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+              Characterized by heightened impulsivity, reward sensitivity, and risk-taking. Prefrontal cortex development lags limbic system development, creating a "developmental mismatch."
+            </p>
+            <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+              <li>Peak impulsivity: mid-to-late adolescence</li>
+              <li>Sensation seeking increases</li>
+              <li>Substance use vulnerability is highest</li>
+              <li>Gradual prefrontal maturation begins</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Early Adulthood (25-40 years)</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+              Continued myelination and pruning of prefrontal systems. Impulsivity generally decreases. Social/economic roles increase self-regulation demands.
+            </p>
+            <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+              <li>Prefrontal maturation largely complete</li>
+              <li>Impulsivity stabilizes at adult levels</li>
+              <li>Career and family milestones increase consistency</li>
+              <li>Genetic effects more pronounced</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Later Adulthood (40+ years)</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+              Gradual cognitive decline, but emotional regulation often improves. Impulsivity trajectories become more variable due to health and social factors.
+            </p>
+            <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+              <li>Executive functions decline</li>
+              <li>Emotional regulation paradoxically improves</li>
+              <li>Health conditions affect impulsivity</li>
+              <li>Individual differences increase</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; margin-top: 2rem;">
+          <h3 style="margin-bottom: 1.5rem;">Longitudinal Research: Large Cohort Studies</h3>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div>
+              <h4 style="color: var(--secondary); font-size: 0.95rem; margin-bottom: 1rem;">ABCD Study (Adolescent Brain Cognitive Development)</h4>
+              <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.8;">
+                <li><strong>N ~10,000</strong> youth ages 9-10</li>
+                <li>Follows brain development from childhood through early adulthood</li>
+                <li>Directly measures delay discounting and behavioral impulsivity</li>
+                <li>Tracks substance use initiation and outcomes</li>
+                <li>Reveals protective factors in brain development</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 style="color: var(--secondary); font-size: 0.95rem; margin-bottom: 1rem;">ALSPAC (Avon Longitudinal Study of Parents and Children)</h4>
+              <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.8;">
+                <li><strong>N ~15,000</strong> participants born in 1991-1992</li>
+                <li>Longest-running UK birth cohort study</li>
+                <li>Comprehensive behavioral and genetic assessment</li>
+                <li>Tracks impulsivity changes from childhood through adulthood</li>
+                <li>Models gene-environment interactions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 2rem;">
+          <h4>Key Finding: Age-Specific Genetic Architecture</h4>
+          <p>Genetic influences on impulsivity vary across development. SNPs predicting high impulsivity in adolescence may have attenuated effects in adulthood. This suggests that genes act through developmental mechanisms (e.g., prefrontal maturation timing) rather than static traits.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CNDS Theory -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Dual-Process Theory</div>
+          <h2>Competing Neurobehavioral Decision Systems (CNDS)</h2>
+          <p>The CNDS framework proposes that impulsive and controlled decision-making arise from two neurobiologically distinct systems that compete for behavioral control.</p>
+        </div>
+
+        <div class="two-col observe-fade">
+          <div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">System 1: Approach System</h3>
+            <div style="background: rgba(253,121,168,0.1); border-left: 3px solid var(--accent); padding: 1.25rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-bottom: 1.5rem;">
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">Automatic, rapid, emotion-driven decision-making</p>
+            </div>
+
+            <h4 style="color: var(--secondary); font-size: 0.95rem; margin-bottom: 1rem;">Characteristics</h4>
+            <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 2;">
+              <li>Ventral striatum, ventromedial prefrontal cortex</li>
+              <li>Rapid, parallel processing</li>
+              <li>Driven by immediate reward/threat</li>
+              <li>Emotionally valenced decisions</li>
+              <li>Minimal cognitive effort required</li>
+            </ul>
+
+            <h4 style="color: var(--secondary); font-size: 0.95rem; margin-bottom: 1rem; margin-top: 1.5rem;">Behavioral Signature</h4>
+            <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 2;">
+              <li>High temporal discounting</li>
+              <li>Risk-seeking behavior</li>
+              <li>Preference for immediate gratification</li>
+              <li>Strong response to incentives</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">System 2: Control System</h3>
+            <div style="background: rgba(107,127,191,0.1); border-left: 3px solid var(--primary); padding: 1.25rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-bottom: 1.5rem;">
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">Deliberate, effortful, goal-oriented decision-making</p>
+            </div>
+
+            <h4 style="color: var(--secondary); font-size: 0.95rem; margin-bottom: 1rem;">Characteristics</h4>
+            <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 2;">
+              <li>Lateral prefrontal cortex, parietal regions</li>
+              <li>Serial, sequential processing</li>
+              <li>Driven by long-term goals/values</li>
+              <li>Rational, logical decisions</li>
+              <li>Requires sustained attention/effort</li>
+            </ul>
+
+            <h4 style="color: var(--secondary); font-size: 0.95rem; margin-bottom: 1rem; margin-top: 1.5rem;">Behavioral Signature</h4>
+            <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 2;">
+              <li>Low temporal discounting</li>
+              <li>Risk-averse behavior</li>
+              <li>Preference for delayed gratification</li>
+              <li>Consistency with stated values</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; margin-top: 2rem; observe-fade">
+          <h3 style="margin-bottom: 1.5rem;">System Competition & Behavioral Outcomes</h3>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem;">
+            <div>
+              <h4 style="color: var(--secondary); font-size: 0.9rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">System 1 Dominates</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                Approach system overpowers control system. High motivation, low inhibition.
+              </p>
+              <ul style="padding-left: 1.5rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.8;">
+                <li>Substance use</li>
+                <li>Risky sexual behavior</li>
+                <li>Aggressive outbursts</li>
+                <li>Pathological gambling</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 style="color: var(--secondary); font-size: 0.9rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Balanced Competition</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                Systems engage in dynamic competition. Outcome depends on context and effort.
+              </p>
+              <ul style="padding-left: 1.5rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.8;">
+                <li>Healthy decision-making</li>
+                <li>Contextual impulse control</li>
+                <li>Flexible self-regulation</li>
+                <li>Adaptive risk-taking</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 style="color: var(--secondary); font-size: 0.9rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">System 2 Dominates</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                Control system overpowers approach system. Rigid self-control, excessive inhibition.
+              </p>
+              <ul style="padding-left: 1.5rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.8;">
+                <li>Overcontrol</li>
+                <li>Anhedonia</li>
+                <li>Obsessive tendencies</li>
+                <li>Anxiety disorders</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 2rem;">
+          <h4>Intervention Implications</h4>
+          <p>The CNDS framework suggests interventions should work on both systems: strengthen system 2 (cognitive training, goal clarification) and reduce system 1 activation (cue exposure, stress management, reducing incentive salience). Effective self-regulation requires both enhanced control capacity and reduced approach motivation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing section -->
+    <section class="section section-alt">
+      <div class="container" style="text-align: center;">
+        <h3 style="margin-bottom: 1rem;">Mathematical Models Guide Scientific Understanding</h3>
+        <p style="max-width: 750px; margin: 0 auto; font-size: 1rem; line-height: 1.8;">
+          By formalizing theoretical concepts into mathematical equations, we can make precise predictions about behavior, identify key parameters that predict individual differences, and test competing theories. These models bridge the gap between brain biology and observable behavior, enabling translational research that improves interventions for impulse control disorders.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Self-Regulation & Delay Discounting Evidence Hub</p>
+      <p style="margin-top:0.3rem;">Deng Lab · Peter Boris Centre for Addictions Research · McMaster University</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="publications.html">Publications</a>
+        <a href="map.html">Interactive Map</a>
+        <a href="resources.html">Resources</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

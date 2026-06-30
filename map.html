@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Map of Self-Regulation Biology | Evidence Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <style>
+    /* Map-specific D3 styles */
+    .node {
+      cursor: pointer;
+      stroke-width: 2px;
+      stroke: rgba(45, 40, 69, 0.1);
+      transition: stroke-width 0.2s, stroke 0.2s, r 0.2s;
+    }
+
+    .node:hover {
+      stroke-width: 3px;
+      stroke: rgba(45, 40, 69, 0.3);
+    }
+
+    .node.highlighted {
+      stroke-width: 3px;
+      stroke: rgba(45, 40, 69, 0.8);
+      filter: drop-shadow(0 0 8px rgba(45, 40, 69, 0.2));
+    }
+
+    .node.dimmed {
+      opacity: 0.3;
+    }
+
+    .link {
+      stroke: rgba(107, 127, 191, 0.2);
+      stroke-width: 1.5px;
+      pointer-events: none;
+    }
+
+    .link.highlighted {
+      stroke: rgba(142, 111, 174, 0.5);
+      stroke-width: 2.5px;
+    }
+
+    .link.dimmed {
+      opacity: 0.1;
+    }
+
+    .node-label {
+      font-size: 11px;
+      font-weight: 600;
+      pointer-events: none;
+      text-anchor: middle;
+      dominant-baseline: central;
+      fill: var(--text-primary);
+      text-shadow: 0 0 3px rgba(244, 240, 246, 0.9);
+    }
+
+    /* Pathway diagram styles */
+    .pathway-flow {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: stretch;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .pathway-column {
+      flex: 1;
+      min-width: 160px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .pathway-column-header {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .pathway-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: center;
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .pathway-item:hover {
+      border-color: var(--secondary);
+      box-shadow: 0 0 12px rgba(142, 111, 174, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .pathway-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--secondary);
+      opacity: 0.6;
+      width: 2rem;
+      flex-shrink: 0;
+    }
+
+    .pathway-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    /* Search and filter styles */
+    .map-search {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.75rem 1.25rem;
+      border-radius: 50px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .map-search:focus {
+      border-color: var(--primary);
+    }
+
+    .map-search::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .pathway-flow {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .pathway-column {
+        flex-direction: row;
+        gap: 0.5rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+
+      .pathway-column-header {
+        position: absolute;
+        left: -9999px;
+      }
+
+      .pathway-item {
+        flex-shrink: 0;
+        width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🧠</span>
+        <span>SR Evidence Hub</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="dropdown-trigger">Science ▾</a>
+          <div class="dropdown-menu">
+            <a href="genetics.html">Genetics</a>
+            <a href="epigenetics.html">Epigenetics</a>
+            <a href="neuroscience.html">Brain / Neuroscience</a>
+            <a href="theory.html">Theory & Models</a>
+            <a href="applications.html">Applications</a>
+          </div>
+        </li>
+        <li><a href="map.html" class="active">Interactive Map</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="eyebrow">Visualization</div>
+      <h1>Map of Self-Regulation Biology</h1>
+      <p>Explore the interconnected network of genes, brain regions, epigenetic mechanisms, behaviors, and health outcomes that shape self-regulation and delay discounting.</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container">
+      <!-- Tab Switcher -->
+      <div class="tab-switcher">
+        <button data-tab="network-view" class="active">Network Graph</button>
+        <button data-tab="pathway-view">Pathway Diagram</button>
+      </div>
+
+      <!-- Network Graph View -->
+      <div id="network-view" class="tab-content active">
+        <div style="margin-bottom: 2rem;">
+          <input
+            type="text"
+            class="map-search"
+            id="network-search"
+            placeholder="Search for genes, brain regions, or phenotypes..."
+          >
+
+          <div class="map-controls">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="Genetics">Genetics</button>
+            <button class="filter-btn" data-category="Epigenetics">Epigenetics</button>
+            <button class="filter-btn" data-category="Brain">Brain</button>
+            <button class="filter-btn" data-category="Phenotypes">Phenotypes</button>
+            <button class="filter-btn" data-category="Health">Health Outcomes</button>
+            <button class="filter-btn" data-category="Methods">Methods</button>
+            <button id="reset-view" style="margin-left: auto;">Reset View</button>
+          </div>
+        </div>
+
+        <svg id="network-svg" style="width: 100%; height: 700px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); background: var(--bg-card);"></svg>
+
+        <div class="map-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #6B7FBF;"></div>
+            <span>Genetics</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #8E6FAE;"></div>
+            <span>Epigenetics</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #B8956A;"></div>
+            <span>Brain Regions</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #C47A9E;"></div>
+            <span>Phenotypes</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #6A9E8A;"></div>
+            <span>Health Outcomes</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #C47A6A;"></div>
+            <span>Methods</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+          <div id="node-tooltip" class="map-tooltip"></div>
+        </div>
+      </div>
+
+      <!-- Pathway Diagram View -->
+      <div id="pathway-view" class="tab-content">
+        <div style="margin-bottom: 2rem;">
+          <p style="color: var(--text-secondary); margin-bottom: 1rem;">This pathway diagram illustrates how genetic variants and epigenetic modifications influence brain biology, which in turn shapes behavioral phenotypes and impacts health outcomes.</p>
+        </div>
+
+        <div class="pathway-container">
+          <div style="overflow-x: auto;">
+            <div class="pathway-flow">
+              <!-- Genes Column -->
+              <div class="pathway-column">
+                <div class="pathway-column-header">📊 Genes</div>
+                <div class="pathway-item">CADM2</div>
+                <div class="pathway-item">NCAM1</div>
+                <div class="pathway-item">DRD2</div>
+                <div class="pathway-item">PGS</div>
+              </div>
+
+              <div class="pathway-arrow">→</div>
+
+              <!-- Epigenetics Column -->
+              <div class="pathway-column">
+                <div class="pathway-column-header">🧬 Epigenetics</div>
+                <div class="pathway-item">DNA Methylation</div>
+                <div class="pathway-item">EWAS Hits</div>
+                <div class="pathway-item">DNAm Clocks</div>
+              </div>
+
+              <div class="pathway-arrow">→</div>
+
+              <!-- Brain Column -->
+              <div class="pathway-column">
+                <div class="pathway-column-header">🧠 Brain</div>
+                <div class="pathway-item">vmPFC</div>
+                <div class="pathway-item">Striatum</div>
+                <div class="pathway-item">Prefrontal</div>
+                <div class="pathway-item">aMCC</div>
+              </div>
+
+              <div class="pathway-arrow">→</div>
+
+              <!-- Behavior Column -->
+              <div class="pathway-column">
+                <div class="pathway-column-header">⚡ Behavior</div>
+                <div class="pathway-item">Delay Discounting</div>
+                <div class="pathway-item">Urgency</div>
+                <div class="pathway-item">Sensation Seeking</div>
+              </div>
+
+              <div class="pathway-arrow">→</div>
+
+              <!-- Health Column -->
+              <div class="pathway-column">
+                <div class="pathway-column-header">❤️ Health</div>
+                <div class="pathway-item">Cardiometabolic</div>
+                <div class="pathway-item">Addiction</div>
+                <div class="pathway-item">Psychiatric</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Pathway Information -->
+        <div style="margin-top: 3rem;">
+          <h3 style="margin-bottom: 1.5rem;">Key Pathway Connections</h3>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            <div class="card">
+              <div class="card-icon yellow">📊</div>
+              <h4>Genetic Basis</h4>
+              <p>Genome-wide association studies (GWAS) identify genetic variants (CADM2, NCAM1, DRD2) that influence impulsivity and delay discounting traits.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-icon teal">🧬</div>
+              <h4>Epigenetic Regulation</h4>
+              <p>DNA methylation patterns (EWAS, DNAm-age) mediate genetic effects and environmental influences on self-regulation capacity.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-icon yellow">🧠</div>
+              <h4>Neural Mechanisms</h4>
+              <p>Brain regions (vmPFC, striatum, lPFC) involved in reward processing, impulse control, and decision-making are shaped by genetic and epigenetic factors.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-icon pink">⚡</div>
+              <h4>Behavioral Phenotypes</h4>
+              <p>Measurable traits like delay discounting, negative urgency, and sensation-seeking emerge from integrated neural and genetic influences.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-icon teal">❤️</div>
+              <h4>Health Consequences</h4>
+              <p>Individual differences in self-regulation predict vulnerability to obesity, cardiovascular disease, addiction, and psychiatric disorders.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-icon yellow">🔬</div>
+              <h4>Assessment Methods</h4>
+              <p>Standardized measures (MCQ, UPPS-P, gJLS2) quantify behavioral phenotypes for research and clinical applications.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Self-Regulation & Delay Discounting Evidence Hub</p>
+      <p style="margin-top: 0.3rem;">Deng Lab · Peter Boris Centre for Addictions Research · McMaster University</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="publications.html">Publications</a>
+        <a href="map.html">Interactive Map</a>
+        <a href="resources.html">Resources</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JS -->
+  <script src="js/main.js"></script>
+
+  <!-- D3 Network Visualization -->
+  <script>
+    // Data structure for the network
+    const networkData = {
+      nodes: [
+        // Genetics (rosy blue)
+        { id: 'CADM2', category: 'Genetics', color: '#6B7FBF', description: 'Cell adhesion molecule 2 — Deng et al. 2023 (23andMe, n=133,517). Pleiotropic for impulsive personality, risk-taking, substance use.' },
+        { id: 'NCAM1', category: 'Genetics', color: '#6B7FBF', description: 'Neural cell adhesion molecule 1 — NTAD cluster. Associated with DRD2 density and reward sensitivity.' },
+        { id: 'DRD2', category: 'Genetics', color: '#6B7FBF', description: 'Dopamine receptor D2 — ANKK1-DRD2 region. Key gene in reward processing and substance use risk.' },
+        { id: 'GWAS-ABCD', category: 'Genetics', color: '#6B7FBF', description: 'Deng et al. 2025 (GBB). GWAS of DD & UPPS-P in children (n=5,548, ABCD Study).' },
+        { id: 'GWAS-ALSPAC', category: 'Genetics', color: '#6B7FBF', description: 'Deng et al. 2024 (Mol Psych). Longitudinal impulsivity GWAS in young adults (n=3,860, ALSPAC).' },
+        { id: 'PGS-Impulsivity', category: 'Genetics', color: '#6B7FBF', description: 'Deng et al. 2023 (GBB). 11 PGS evaluated for impulsive choice, action & personality in n=1,534 adults.' },
+        { id: 'Externalizing', category: 'Genetics', color: '#6B7FBF', description: 'Deng et al. 2025 (Addiction). Externalizing as common genetic factor across substance use & behavioral conditions.' },
+
+        // Epigenetics (lavender)
+        { id: 'Smoking-mDNA', category: 'Epigenetics', color: '#8E6FAE', description: 'Deng et al. 2024 (eLife). Maternal smoking DNA methylation risk score → offspring health, European & South Asian.' },
+        { id: 'Methylation-CpG', category: 'Epigenetics', color: '#8E6FAE', description: 'CpG site DNA methylation patterns at impulsivity-related loci.' },
+        { id: 'DNAm-Age', category: 'Epigenetics', color: '#8E6FAE', description: 'DNA methylation-based biological age estimates and epigenetic clocks.' },
+
+        // Brain Regions (muted gold)
+        { id: 'vmPFC', category: 'Brain', color: '#B8956A', description: 'Ventromedial prefrontal cortex — reward valuation, impulse control.' },
+        { id: 'Ventral-Striatum', category: 'Brain', color: '#B8956A', description: 'Nucleus accumbens / ventral putamen — reward processing.' },
+        { id: 'lPFC', category: 'Brain', color: '#B8956A', description: 'Lateral prefrontal cortex — executive control and cognitive regulation.' },
+        { id: 'aMCC', category: 'Brain', color: '#B8956A', description: 'Anterior midcingulate cortex — conflict monitoring and effort.' },
+        { id: 'Hippocampus', category: 'Brain', color: '#B8956A', description: 'Memory consolidation, temporal context, episodic future thinking.' },
+        { id: 'Insula', category: 'Brain', color: '#B8956A', description: 'Interoceptive awareness and risk processing.' },
+
+        // Phenotypes (rose)
+        { id: 'Delay-Discounting', category: 'Phenotypes', color: '#C47A9E', description: 'Preference for immediate over delayed rewards (MCQ, adjusting-amount tasks).' },
+        { id: 'Negative-Urgency', category: 'Phenotypes', color: '#C47A9E', description: 'Tendency to act rashly when experiencing negative emotion (UPPS-P).' },
+        { id: 'Sensation-Seeking', category: 'Phenotypes', color: '#C47A9E', description: 'Desire for novel and intense experiences (UPPS-P). SNP-h²=0.35.' },
+        { id: 'Lack-of-Premeditation', category: 'Phenotypes', color: '#C47A9E', description: 'Failure to consider consequences before acting (UPPS-P).' },
+
+        // Health Outcomes (sage)
+        { id: 'Obesity', category: 'Health', color: '#6A9E8A', description: 'Overweight and obesity outcomes linked to impulsive eating and DD.' },
+        { id: 'Cardiovascular', category: 'Health', color: '#6A9E8A', description: 'Cardiometabolic risk influenced by self-regulation genetics.' },
+        { id: 'Alcohol-Use', category: 'Health', color: '#6A9E8A', description: 'Problematic alcohol use — PheWAS of alcohol PGS across 42 phenotypes (Deng 2024).' },
+        { id: 'Tobacco-Use', category: 'Health', color: '#6A9E8A', description: 'Smoking and nicotine dependence. Maternal smoking → offspring methylation (Deng 2024, eLife).' },
+        { id: 'ADHD', category: 'Health', color: '#6A9E8A', description: 'Attention-deficit/hyperactivity disorder and externalizing spectrum.' },
+
+        // Methods (dusty coral)
+        { id: 'gJLS2', category: 'Methods', color: '#C47A6A', description: 'Deng & Sun 2022 (G3). R package for X-inclusive GWAS with joint location-scale tests.' },
+        { id: 'MCQ', category: 'Methods', color: '#C47A6A', description: 'Monetary Choice Questionnaire (Kirby et al. 1999). 27-item delay discounting measure.' },
+        { id: 'UPPS-P', category: 'Methods', color: '#C47A6A', description: 'UPPS-P Impulsive Behavior Scale. 59-item five-factor impulsivity measure.' },
+        { id: 'Demand-Curves', category: 'Methods', color: '#C47A6A', description: 'Behavioral economic demand curve analysis for substance reinforcement (MacKillop).' }
+      ],
+
+      links: [
+        // CADM2 connections
+        { source: 'CADM2', target: 'Delay-Discounting' },
+        { source: 'CADM2', target: 'Sensation-Seeking' },
+        { source: 'CADM2', target: 'Alcohol-Use' },
+        { source: 'CADM2', target: 'vmPFC' },
+
+        // NCAM1 connections
+        { source: 'NCAM1', target: 'DRD2' },
+        { source: 'NCAM1', target: 'Ventral-Striatum' },
+
+        // DRD2 connections
+        { source: 'DRD2', target: 'Ventral-Striatum' },
+        { source: 'DRD2', target: 'Alcohol-Use' },
+
+        // GWAS connections (Deng studies)
+        { source: 'GWAS-ABCD', target: 'CADM2' },
+        { source: 'GWAS-ABCD', target: 'Delay-Discounting' },
+        { source: 'GWAS-ABCD', target: 'Negative-Urgency' },
+        { source: 'GWAS-ALSPAC', target: 'CADM2' },
+        { source: 'GWAS-ALSPAC', target: 'NCAM1' },
+        { source: 'GWAS-ALSPAC', target: 'PGS-Impulsivity' },
+        { source: 'GWAS-ALSPAC', target: 'Sensation-Seeking' },
+        { source: 'Externalizing', target: 'Alcohol-Use' },
+        { source: 'Externalizing', target: 'Tobacco-Use' },
+        { source: 'Externalizing', target: 'ADHD' },
+
+        // PGS connections
+        { source: 'PGS-Impulsivity', target: 'Obesity' },
+        { source: 'PGS-Impulsivity', target: 'Cardiovascular' },
+        { source: 'PGS-Impulsivity', target: 'Alcohol-Use' },
+        { source: 'PGS-Impulsivity', target: 'ADHD' },
+
+        // Epigenetics connections
+        { source: 'Smoking-mDNA', target: 'Methylation-CpG' },
+        { source: 'Smoking-mDNA', target: 'Tobacco-Use' },
+        { source: 'Smoking-mDNA', target: 'Cardiovascular' },
+        { source: 'Methylation-CpG', target: 'Delay-Discounting' },
+        { source: 'Methylation-CpG', target: 'Cardiovascular' },
+        { source: 'DNAm-Age', target: 'Cardiovascular' },
+        { source: 'DNAm-Age', target: 'Tobacco-Use' },
+
+        // Brain region connections
+        { source: 'vmPFC', target: 'Delay-Discounting' },
+        { source: 'vmPFC', target: 'Lack-of-Premeditation' },
+        { source: 'Ventral-Striatum', target: 'Delay-Discounting' },
+        { source: 'Ventral-Striatum', target: 'Sensation-Seeking' },
+        { source: 'lPFC', target: 'Negative-Urgency' },
+        { source: 'lPFC', target: 'Delay-Discounting' },
+        { source: 'aMCC', target: 'Negative-Urgency' },
+        { source: 'Hippocampus', target: 'Delay-Discounting' },
+        { source: 'Insula', target: 'Negative-Urgency' },
+
+        // Phenotype to health outcome connections
+        { source: 'Delay-Discounting', target: 'Obesity' },
+        { source: 'Delay-Discounting', target: 'Alcohol-Use' },
+        { source: 'Delay-Discounting', target: 'Tobacco-Use' },
+        { source: 'Delay-Discounting', target: 'Cardiovascular' },
+        { source: 'Negative-Urgency', target: 'Alcohol-Use' },
+        { source: 'Negative-Urgency', target: 'ADHD' },
+
+        // Methods connections
+        { source: 'MCQ', target: 'Delay-Discounting' },
+        { source: 'UPPS-P', target: 'Negative-Urgency' },
+        { source: 'UPPS-P', target: 'Sensation-Seeking' },
+        { source: 'UPPS-P', target: 'Lack-of-Premeditation' },
+        { source: 'Demand-Curves', target: 'Alcohol-Use' },
+        { source: 'gJLS2', target: 'GWAS-DD' },
+        { source: 'gJLS2', target: 'GWAS-UPPS' }
+      ]
+    };
+
+    // Initialize D3 visualization
+    function initNetworkVisualization() {
+      const svg = d3.select('#network-svg');
+      const width = svg.node().clientWidth;
+      const height = svg.node().clientHeight;
+
+      // Create container groups
+      const g = svg.append('g');
+      const linkGroup = g.append('g').attr('class', 'links');
+      const nodeGroup = g.append('g').attr('class', 'nodes');
+
+      // Simulation
+      const simulation = d3.forceSimulation(networkData.nodes)
+        .force('link', d3.forceLink(networkData.links).id(d => d.id).distance(80).strength(0.3))
+        .force('charge', d3.forceManyBody().strength(-300))
+        .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('collide', d3.forceCollide(25));
+
+      // Draw links
+      const link = linkGroup.selectAll('line')
+        .data(networkData.links)
+        .enter()
+        .append('line')
+        .attr('class', 'link')
+        .attr('stroke', 'rgba(107, 127, 191, 0.2)')
+        .attr('stroke-width', 1.5);
+
+      // Draw nodes
+      const node = nodeGroup.selectAll('circle')
+        .data(networkData.nodes)
+        .enter()
+        .append('circle')
+        .attr('class', 'node')
+        .attr('r', d => (d.category === 'Methods' ? 18 : 22))
+        .attr('fill', d => d.color)
+        .attr('stroke', 'rgba(45, 40, 69, 0.1)')
+        .attr('stroke-width', 2)
+        .on('click', highlightNode)
+        .on('mouseover', (e, d) => showTooltip(e, d))
+        .on('mouseout', hideTooltip)
+        .call(d3.drag()
+          .on('start', dragStart)
+          .on('drag', dragging)
+          .on('end', dragEnd));
+
+      // Node labels
+      const labels = nodeGroup.selectAll('text')
+        .data(networkData.nodes)
+        .enter()
+        .append('text')
+        .attr('class', 'node-label')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '0.3em')
+        .text(d => d.id.replace('-', '\n'))
+        .attr('font-size', '10px')
+        .attr('pointer-events', 'none');
+
+      // Update positions on simulation tick
+      simulation.on('tick', () => {
+        link
+          .attr('x1', d => d.source.x)
+          .attr('y1', d => d.source.y)
+          .attr('x2', d => d.target.x)
+          .attr('y2', d => d.target.y);
+
+        node
+          .attr('cx', d => d.x = Math.max(25, Math.min(width - 25, d.x)))
+          .attr('cy', d => d.y = Math.max(25, Math.min(height - 25, d.y)));
+
+        labels
+          .attr('x', d => d.x)
+          .attr('y', d => d.y);
+      });
+
+      // Zoom behavior
+      const zoom = d3.zoom().on('zoom', (e) => {
+        g.attr('transform', e.transform);
+      });
+      svg.call(zoom);
+
+      // Helper functions
+      function highlightNode(e, d) {
+        const connectedNodes = new Set([d.id]);
+        const connectedLinks = new Set();
+
+        networkData.links.forEach(link => {
+          if (link.source.id === d.id || link.target.id === d.id) {
+            connectedLinks.add(link);
+            connectedNodes.add(link.source.id);
+            connectedNodes.add(link.target.id);
+          }
+        });
+
+        node.classed('highlighted', n => connectedNodes.has(n.id))
+          .classed('dimmed', n => !connectedNodes.has(n.id));
+
+        link.classed('highlighted', l => connectedLinks.has(l))
+          .classed('dimmed', l => !connectedLinks.has(l));
+      }
+
+      function showTooltip(e, d) {
+        const tooltip = document.getElementById('node-tooltip');
+        tooltip.innerHTML = `
+          <div style="color: var(--secondary); font-weight: 700; margin-bottom: 0.5rem;">${d.id}</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">${d.description}</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.75rem;">Category: ${d.category}</div>
+        `;
+        tooltip.classList.add('visible');
+        tooltip.style.left = (e.pageX + 10) + 'px';
+        tooltip.style.top = (e.pageY + 10) + 'px';
+      }
+
+      function hideTooltip() {
+        const tooltip = document.getElementById('node-tooltip');
+        tooltip.classList.remove('visible');
+        node.classed('highlighted', false).classed('dimmed', false);
+        link.classed('highlighted', false).classed('dimmed', false);
+      }
+
+      function dragStart(e, d) {
+        if (!e.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      }
+
+      function dragging(e, d) {
+        d.fx = e.x;
+        d.fy = e.y;
+      }
+
+      function dragEnd(e, d) {
+        if (!e.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
+
+      // Filter by category
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          const category = this.dataset.category;
+          node.style('display', d => (category === 'all' || d.category === category) ? 'block' : 'none');
+          labels.style('display', d => (category === 'all' || d.category === category) ? 'block' : 'none');
+          link.style('display', d => {
+            const sourceMatch = category === 'all' || d.source.category === category;
+            const targetMatch = category === 'all' || d.target.category === category;
+            return (sourceMatch || targetMatch) ? 'line' : 'none';
+          });
+        });
+      });
+
+      // Search functionality
+      document.getElementById('network-search').addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase();
+        node.style('opacity', d => d.id.toLowerCase().includes(query) ? 1 : 0.2);
+        labels.style('opacity', d => d.id.toLowerCase().includes(query) ? 1 : 0.2);
+      });
+
+      // Reset view
+      document.getElementById('reset-view').addEventListener('click', function() {
+        document.getElementById('network-search').value = '';
+        node.style('opacity', 1).style('display', 'block').classed('highlighted', false).classed('dimmed', false);
+        labels.style('opacity', 1).style('display', 'block');
+        link.style('display', 'line').classed('highlighted', false).classed('dimmed', false);
+        simulation.alpha(0.3).restart();
+      });
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', initNetworkVisualization);
+
+    // Responsive resize
+    window.addEventListener('resize', () => {
+      // Optionally reinitialize for true responsive behavior
+    });
+  </script>
+</body>
+</html>

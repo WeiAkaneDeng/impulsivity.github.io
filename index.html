@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-Regulation & Delay Discounting Evidence Hub</title>
+  <meta name="description" content="Evidence hub for Wei Q. Deng's research on genetic, epigenetic, neural, and behavioral mechanisms of self-regulation and delay discounting.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- D3.js for visualizations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🧬</span>
+        <span>SR Evidence Hub</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="dropdown-trigger">Science ▾</a>
+          <div class="dropdown-menu">
+            <a href="genetics.html">Genetics</a>
+            <a href="epigenetics.html">Epigenetics</a>
+            <a href="neuroscience.html">Brain / Neuroscience</a>
+            <a href="theory.html">Theory & Models</a>
+            <a href="applications.html">Applications</a>
+          </div>
+        </li>
+        <li><a href="map.html">Interactive Map</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>🏢</span>
+        Peter Boris Centre for Addictions Research · McMaster University
+      </div>
+
+      <h1>Self-Regulation & Delay Discounting <span class="gradient-text">Evidence Hub</span></h1>
+
+      <p class="subtitle">
+        At the forefront of understanding the genetic, epigenetic, neural, and behavioral mechanisms underlying self-regulation and delay discounting. Integrating multi-omics, longitudinal data, and computational approaches to advance translational research.
+      </p>
+
+      <div class="btn-group">
+        <a href="map.html" class="btn btn-primary">
+          <span>🗺️</span> Explore the Map
+        </a>
+        <a href="publications.html" class="btn btn-outline">
+          <span>📚</span> Browse Publications
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">6+</div>
+          <div class="stat-label">Research Areas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">8</div>
+          <div class="stat-label">Key Genes Identified</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">40+</div>
+          <div class="stat-label">Publications</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Cohorts Studied</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Researcher: Wei Q. Deng -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Lab Director</div>
+        <h2>Featured Researcher</h2>
+      </div>
+
+      <div class="researcher-panel">
+        <div class="researcher-info">
+          <h3>Wei Q. Deng, PhD</h3>
+          <div class="researcher-title">Assistant Professor</div>
+          <div class="researcher-affiliation">
+            Department of Psychiatry and Behavioural Neurosciences<br>
+            McMaster University<br>
+            Peter Boris Centre for Addictions Research
+          </div>
+          <p>
+            Wei Q. Deng's research spans statistical genetics, genome-wide association studies (GWAS), polygenic risk scores, epigenetics, and the developmental trajectories of delay discounting across the lifespan. Her work integrates computational genomics, methylation profiling, and behavioral economics to understand individual differences in self-regulation.
+          </p>
+          <div class="researcher-links">
+            <a href="https://scholar.google.ca/citations?user=pvd7ABUAAAAJ&hl=en" target="_blank" rel="noopener">
+              <span>🔗</span> Google Scholar
+            </a>
+            <a href="https://experts.mcmaster.ca/people/dengwq" target="_blank" rel="noopener">
+              <span>🏛️</span> McMaster Profile
+            </a>
+            <a href="https://github.com/weiakanedeng" target="_blank" rel="noopener">
+              <span>💻</span> GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="cards-grid" style="grid-template-columns: 1fr;">
+          <div class="card observe-fade">
+            <div class="card-icon purple">🧬</div>
+            <h3>Genome-Wide Discovery</h3>
+            <p>GWAS of impulsivity, delay discounting, and related behavioral phenotypes across large cohorts</p>
+            <span class="card-tag">GWAS</span>
+          </div>
+          <div class="card observe-fade">
+            <div class="card-icon teal">📊</div>
+            <h3>Polygenic Risk Architecture</h3>
+            <p>Polygenic score development and validation for prediction of self-regulation in independent samples</p>
+            <span class="card-tag">PGS</span>
+          </div>
+          <div class="card observe-fade">
+            <div class="card-icon pink">🧪</div>
+            <h3>Epigenetic Mechanisms</h3>
+            <p>Epigenome-wide association studies (EWAS) and methylation profiling related to delay discounting</p>
+            <span class="card-tag">EWAS</span>
+          </div>
+          <div class="card observe-fade">
+            <div class="card-icon yellow">⚙️</div>
+            <h3>Computational Methods</h3>
+            <p>Development of statistical tools including gJLS2 R package for advanced genetic analysis</p>
+            <span class="card-tag">METHODS</span>
+          </div>
+          <div class="card observe-fade">
+            <div class="card-icon purple">📈</div>
+            <h3>Developmental Trajectories</h3>
+            <p>Longitudinal studies using ABCD, ALSPAC, and other cohorts to track trajectories across development</p>
+            <span class="card-tag">LONGIT</span>
+          </div>
+          <div class="card observe-fade">
+            <div class="card-icon teal">❤️</div>
+            <h3>Health Outcomes</h3>
+            <p>Links between self-regulation genetics and cardiometabolic, mental health, and addiction outcomes</p>
+            <span class="card-tag">HEALTH</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Collaborator: James MacKillop -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Research Leadership</div>
+        <h2>Featured Collaborator</h2>
+        <p>Centre Director and key collaborator in understanding the behavioral economics and neurobiology of self-regulation</p>
+      </div>
+
+      <div class="researcher-panel">
+        <div class="researcher-info">
+          <h3>James MacKillop, PhD</h3>
+          <div class="researcher-title">Peter Boris Chair in Addiction Research</div>
+          <div class="researcher-affiliation">
+            Director, Peter Boris Centre for Addictions Research<br>
+            McMaster University<br>
+            Department of Psychiatry and Behavioural Neurosciences
+          </div>
+          <p>
+            Dr. MacKillop's research focuses on behavioral economics, neuroeconomics, delay discounting, and addictive behaviors. His meta-analyses and theoretical work have shaped the field's understanding of how temporal discounting relates to addiction and other health outcomes.
+          </p>
+          <div class="researcher-links">
+            <a href="https://scholar.google.ca/citations?user=uf-9LJIAAAAJ&hl=en" target="_blank" rel="noopener">
+              <span>🔗</span> Google Scholar
+            </a>
+            <a href="https://pbcar.healthsci.mcmaster.ca/" target="_blank" rel="noopener">
+              <span>🏛️</span> PBCAR
+            </a>
+          </div>
+        </div>
+
+        <div class="cards-grid" style="grid-template-columns: 1fr;">
+          <div class="card observe-fade">
+            <div class="card-icon purple">🎓</div>
+            <h3>Behavioral Economics</h3>
+            <p>Theoretical and empirical work on temporal discounting as a dimension of behavioral economics in addiction</p>
+            <span class="card-tag">THEORY</span>
+          </div>
+          <div class="card observe-fade">
+            <div class="card-icon teal">🧠</div>
+            <h3>Neuroeconomics</h3>
+            <p>Integration of neurobiological and economic approaches to understanding decision-making and self-regulation</p>
+            <span class="card-tag">NEURO</span>
+          </div>
+          <div class="card observe-fade">
+            <div class="card-icon pink">📋</div>
+            <h3>Meta-Analysis & Synthesis</h3>
+            <p>Comprehensive meta-analyses of delay discounting research linking findings across populations and disorders</p>
+            <span class="card-tag">META</span>
+          </div>
+          <div class="card observe-fade">
+            <div class="card-icon yellow">🏥</div>
+            <h3>Clinical Translation</h3>
+            <p>Translation of basic research findings into clinical interventions for addiction and impulse control disorders</p>
+            <span class="card-tag">CLINICAL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Explore the Science Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Research Domains</div>
+        <h2>Explore the Science</h2>
+        <p>Deep dives into each major research area with detailed findings, visualizations, and datasets</p>
+      </div>
+
+      <div class="cards-grid">
+        <a href="genetics.html" class="card observe-fade" style="text-decoration: none; color: inherit;">
+          <div class="card-icon purple">🧬</div>
+          <h3>Genetics & GWAS</h3>
+          <p>Genome-wide association studies identifying genetic variants associated with self-regulation and delay discounting phenotypes</p>
+          <span class="card-tag">LEARN MORE →</span>
+        </a>
+
+        <a href="epigenetics.html" class="card observe-fade" style="text-decoration: none; color: inherit;">
+          <div class="card-icon pink">🧪</div>
+          <h3>Epigenetics</h3>
+          <p>DNA methylation, histone modifications, and other epigenetic mechanisms regulating self-regulation genes</p>
+          <span class="card-tag">LEARN MORE →</span>
+        </a>
+
+        <a href="neuroscience.html" class="card observe-fade" style="text-decoration: none; color: inherit;">
+          <div class="card-icon teal">🧠</div>
+          <h3>Brain & Neuroscience</h3>
+          <p>Neuroimaging, brain structure/function, and neural circuits underlying temporal decision-making</p>
+          <span class="card-tag">LEARN MORE →</span>
+        </a>
+
+        <a href="theory.html" class="card observe-fade" style="text-decoration: none; color: inherit;">
+          <div class="card-icon yellow">📐</div>
+          <h3>Theory & Models</h3>
+          <p>Mathematical and computational models of delay discounting, decision-making, and self-regulation</p>
+          <span class="card-tag">LEARN MORE →</span>
+        </a>
+
+        <a href="applications.html" class="card observe-fade" style="text-decoration: none; color: inherit;">
+          <div class="card-icon purple">💡</div>
+          <h3>Clinical Applications</h3>
+          <p>Translation of research findings into interventions for addiction, obesity, ADHD, and other disorders</p>
+          <span class="card-tag">LEARN MORE →</span>
+        </a>
+
+        <a href="map.html" class="card observe-fade" style="text-decoration: none; color: inherit;">
+          <div class="card-icon teal">🗺️</div>
+          <h3>Interactive Map</h3>
+          <p>Explore the network of genes, mechanisms, outcomes, and studies in an interactive visualization</p>
+          <span class="card-tag">LEARN MORE →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Self-Regulation & Delay Discounting Evidence Hub</p>
+      <p style="margin-top: 0.3rem;">Deng Lab · Peter Boris Centre for Addictions Research · McMaster University</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="publications.html">Publications</a>
+        <a href="map.html">Interactive Map</a>
+        <a href="resources.html">Resources</a>
+        <a href="team.html">Team</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
